@@ -1,21 +1,56 @@
 import { Button } from "@/components/ui/button"
-import { Cloud, Server, GitBranch, Shield, Container, Github, Linkedin, Download, FileText, Mail, Phone, Globe, MessageCircle, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Calendar, ArrowRight, FolderGit2, ArrowDown, Network } from "lucide-react"
+import { Cloud, Server, GitBranch, Shield, Container, Github, Linkedin, Download, FileText, Mail, Phone, Globe, MessageCircle, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Calendar, ArrowRight, FolderGit2, ArrowDown, Network, Trophy } from "lucide-react"
 import { useEffect, useState } from "react"
  
 function App() {
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [currentCard, setCurrentCard] = useState(0)
   const [currentSection, setCurrentSection] = useState(0)
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false)
 
   const sections = ['hero', 'contact', 'cv']
 
   const services = [
-    { icon: <Cloud className="w-8 h-8" />, title: "Cloud Architecture" },
-    { icon: <Server className="w-8 h-8" />, title: "DevOps" },
-    { icon: <Container className="w-8 h-8" />, title: "Containers" },
-    { icon: <GitBranch className="w-8 h-8" />, title: "CI/CD" },
-    { icon: <Shield className="w-8 h-8" />, title: "Security" },
-    { icon: <Network className="w-8 h-8" />, title: "Kubernetes" },
+    { 
+      icon: <Cloud className="w-8 h-8" />, 
+      title: "Cloud Architecture",
+      description: "Designing scalable and resilient cloud infrastructure on AWS and Azure. Expertise in microservices, serverless architectures, and cloud-native solutions."
+    },
+    { 
+      icon: <Server className="w-8 h-8" />, 
+      title: "DevOps",
+      description: "Implementing CI/CD pipelines, infrastructure as code, and automation strategies. Streamlining development workflows for faster, reliable deployments."
+    },
+    { 
+      icon: <Container className="w-8 h-8" />, 
+      title: "Containers",
+      description: "Building and managing containerized applications with Docker. Optimizing container images and orchestrating multi-container environments."
+    },
+    { 
+      icon: <GitBranch className="w-8 h-8" />, 
+      title: "CI/CD",
+      description: "Automating build, test, and deployment processes. Creating robust pipelines with GitHub Actions, GitLab CI and ArgoCD."
+    },
+    { 
+      icon: <Shield className="w-8 h-8" />, 
+      title: "Security",
+      description: "Implementing security best practices, compliance standards, and automated security scanning. Ensuring secure infrastructure and application deployments."
+    },
+    { 
+      icon: <Network className="w-8 h-8" />, 
+      title: "Kubernetes",
+      description: "Deploying and managing production-grade Kubernetes clusters. Expertise in Helm, operators, service mesh, and cloud-native ecosystem tools."
+    },
+    { 
+      icon: <Server className="w-8 h-8" />, 
+      title: "Backend",
+      description: "Building robust server-side applications and APIs. Expertise in Node.js, Python, and microservices architecture for scalable backend solutions."
+    },
+    { 
+      icon: <Trophy className="w-8 h-8" />, 
+      title: "Frontend",
+      description: "Creating responsive and modern web applications. Proficient in React, TypeScript, and modern frontend frameworks for exceptional user experiences."
+    },
   ]
 
   useEffect(() => {
@@ -36,10 +71,12 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentCard((prev) => (prev + 1) % services.length)
+      if (!isCarouselPaused) {
+        setCurrentCard((prev) => (prev + 1) % services.length)
+      }
     }, 3000)
     return () => clearInterval(interval)
-  }, [services.length])
+  }, [services.length, isCarouselPaused])
 
   const nextCard = () => {
     setCurrentCard((prev) => (prev + 1) % services.length)
@@ -172,19 +209,82 @@ function App() {
           {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight mt-16 sm:mt-20 lg:mt-24">
             This is{" "}
-            <span className="bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] bg-clip-text text-transparent">
-              Fractiunate.me
+            <span className="relative inline-block">
+              <span className="bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] bg-clip-text text-transparent" style={{
+                WebkitTextStroke: '1px transparent',
+                paintOrder: 'stroke fill'
+              }}>
+                FRACTIUNATE.me
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] bg-clip-text text-transparent" style={{
+                WebkitTextStroke: '1px turquoise',
+                filter: 'drop-shadow(-2px 0 3px rgba(64, 224, 208, 0.2)) drop-shadow(-1px 0 2px rgba(64, 224, 208, 0.1))',
+                WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%)',
+                maskImage: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 80%)'
+              }}>
+                FRACTIUNATE.me
+              </span>
             </span>
           </h1>
           
           {/* Subheading */}
-          <p className="text-lg sm:text-xl md:text-2xl text-slate-300 mb-4 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Hi, I'm David. Glad you found your way to Quality Software Engineering & Cloud Architecture, made in Berlin.
           </p>
 
-          {/* Services Carousel */}
-          <div className="relative mb-12 max-w-2xl mx-auto px-16 sm:px-24">
-            <div className="relative h-64 perspective-1000">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            <a href="#contact" className="w-full sm:w-auto">
+              <Button 
+                size="lg" 
+                className="w-full sm:w-48 bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] hover:from-[oklch(55%_.22_325)] hover:to-[oklch(60%_.25_320)] text-white border-0 shadow-lg shadow-[oklch(60%_.25_330)]/30"
+              >
+                Get in Touch
+              </Button>
+            </a>
+            <a href="#cv" className="w-full sm:w-auto">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="w-full sm:w-48 bg-transparent border-2 border-slate-600 text-white hover:bg-slate-800/50 hover:border-[oklch(60%_.25_330)] hover:text-white transition-all duration-300"
+              >
+                <Trophy className="w-5 h-5 mr-2" />
+                My Experience
+              </Button>
+            </a>
+            <a href="https://devops-sushi.de/" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="w-full sm:w-48 bg-transparent border-2 border-slate-600 text-white hover:bg-slate-800/50 hover:border-[oklch(60%_.25_330)] hover:text-white transition-all duration-300"
+              >
+                <BookOpen className="w-5 h-5 mr-2" />
+                Read Blog
+              </Button>
+            </a>
+          </div>
+
+          {/* Services Carousel Wrapper */}
+          <div className="relative mb-8 max-w-4xl mx-auto px-16">
+            {/* Navigation Buttons - Outside Left */}
+            <button
+              onClick={prevCard}
+              className="absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center z-40 shadow-lg"
+              aria-label="Previous service"
+            >
+              <ChevronLeft className="w-5 h-5 text-slate-300" />
+            </button>
+            {/* Navigation Buttons - Outside Right */}
+            <button
+              onClick={nextCard}
+              className="absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center z-40 shadow-lg"
+              aria-label="Next service"
+            >
+              <ChevronRight className="w-5 h-5 text-slate-300" />
+            </button>
+
+            {/* Services Carousel */}
+            <div className="relative h-48 perspective-1000 overflow-hidden">
               <div className="relative h-full flex items-center justify-center">
                 {services.map((service, index) => {
                   const offset = (index - currentCard + services.length) % services.length
@@ -195,19 +295,25 @@ function App() {
                   let transform = 'translateX(0) rotateY(0deg) scale(1)'
                   let opacity = 1
                   let zIndex = 0
+                  let maskImage = 'none'
 
                   if (isCurrent) {
                     transform = 'translateX(0) scale(1)'
                     opacity = 1
                     zIndex = 30
+                    maskImage = 'none'
                   } else if (isNext) {
                     transform = 'translateX(50%) scale(0.85) rotateY(-10deg)'
                     opacity = 0.4
                     zIndex = 10
+                    // Fade to the right (toward outside)
+                    maskImage = 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 100%)'
                   } else if (isPrev) {
                     transform = 'translateX(-50%) scale(0.85) rotateY(10deg)'
                     opacity = 0.4
                     zIndex = 10
+                    // Fade to the left (toward outside)
+                    maskImage = 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 100%)'
                   } else {
                     // Hide cards that are not current/next/prev
                     opacity = 0
@@ -223,85 +329,55 @@ function App() {
                         opacity,
                         zIndex,
                         pointerEvents: isCurrent ? 'auto' : 'none',
+                        WebkitMaskImage: maskImage,
+                        maskImage: maskImage,
                       }}
+                      onMouseEnter={() => isCurrent && setIsCarouselPaused(true)}
+                      onMouseLeave={() => isCurrent && setIsCarouselPaused(false)}
                     >
-                      <div className="card-3d bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-8 sm:p-12 w-72 sm:w-80 h-48 flex flex-col items-center justify-center hover:bg-slate-800/70 hover:border-[oklch(60%_.25_330)]/50 transition-all duration-300">
-                        <div className="text-[oklch(60%_.25_330)] mb-4 transition-transform duration-300">
+                      <div className="card-3d bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6 w-64 sm:w-72 h-40 flex flex-col items-center justify-center hover:bg-slate-800/70 hover:border-[oklch(60%_.25_330)]/50 transition-all duration-300">
+                        <div className="text-[oklch(60%_.25_330)] mb-3 transition-transform duration-300">
                           {service.icon}
                         </div>
-                        <h3 className="text-white text-xl sm:text-2xl font-semibold text-center">{service.title}</h3>
+                        <h3 className="text-white text-lg sm:text-xl font-semibold text-center">{service.title}</h3>
                       </div>
                     </div>
                   )
                 })}
               </div>
             </div>
+          </div>
 
-
-            {/* Navigation Buttons */}
-            <button
-              onClick={prevCard}
-              className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center z-40"
-              aria-label="Previous service"
-            >
-              <ChevronLeft className="w-5 h-5 text-slate-300" />
-            </button>
-            <button
-              onClick={nextCard}
-              className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center z-40"
-              aria-label="Next service"
-            >
-              <ChevronRight className="w-5 h-5 text-slate-300" />
-            </button>
-
-            {/* Indicators */}
-            <div className="flex justify-center gap-2 mt-8">
-              {services.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentCard(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentCard 
-                      ? 'bg-[oklch(60%_.25_330)] w-8' 
-                      : 'bg-slate-600 hover:bg-slate-500'
-                  }`}
-                  aria-label={`Go to ${services[index].title}`}
-                />
-              ))}
+          {/* Service Description - Code Block Style */}
+          <div className="mb-2 max-w-3xl mx-auto">
+            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-3 font-mono text-xs sm:text-sm">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-slate-500 select-none">$</span>
+                <span className="text-[oklch(60%_.25_330)]">describe</span>
+                <span className="text-slate-400">--service</span>
+                <span className="text-white">{services[currentCard].title}</span>
+              </div>
+              <div className="pl-4 text-slate-300 leading-snug text-xs sm:text-sm">
+                {services[currentCard].description}
+              </div>
             </div>
           </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a href="#contact" className="w-full sm:w-auto">
-                <Button 
-                  size="lg" 
-                  className="w-full sm:w-48 bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] hover:from-[oklch(55%_.22_325)] hover:to-[oklch(60%_.25_320)] text-white border-0 shadow-lg shadow-[oklch(60%_.25_330)]/30"
-                >
-                  Get in Touch
-                </Button>
-              </a>
-              <a href="#cv" className="w-full sm:w-auto">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="w-full sm:w-48 bg-transparent border-2 border-slate-600 text-white hover:bg-slate-800/50 hover:border-[oklch(60%_.25_330)] hover:text-white transition-all duration-300"
-                >
-                  <FileText className="w-5 h-5 mr-2" />
-                  My Experience
-                </Button>
-              </a>
-              <a href="https://devops-sushi.de/" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="w-full sm:w-48 bg-transparent border-2 border-slate-600 text-white hover:bg-slate-800/50 hover:border-[oklch(60%_.25_330)] hover:text-white transition-all duration-300"
-                >
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  Read Blog
-                </Button>
-              </a>
-            </div>
+          {/* Indicators */}
+          <div className="flex justify-center gap-2 mt-6">
+            {services.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentCard(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentCard 
+                    ? 'bg-[oklch(60%_.25_330)] w-8' 
+                    : 'bg-slate-600 hover:bg-slate-500'
+                }`}
+                aria-label={`Go to ${services[index].title}`}
+              />
+            ))}
+          </div>
 
           {/* Social Links - Mobile Only */}
           <div className="flex lg:hidden gap-4 justify-center items-center mt-12">
@@ -327,14 +403,14 @@ function App() {
         </div>
 
           {/* Current Work Status */}
-          <div className="flex justify-center mt-16">
+          {/* <div className="flex justify-center mt-16">
             <div className="inline-flex items-center gap-2 bg-slate-800/50 border border-slate-700 rounded-full px-6 py-3">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <p className="text-sm sm:text-base text-slate-300">
                 Currently working for <span className="text-white font-semibold">GEBIT Solutions GmbH</span>
               </p>
             </div>
-          </div>
+          </div> */}
       </div>
 
       {/* Contact Section */}

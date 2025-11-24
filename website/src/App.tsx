@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Cloud, Server, GitBranch, Shield, Container, Github, Linkedin, Download, FileText, Mail, Phone, Globe, MessageCircle, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Calendar, ArrowRight, FolderGit2, ArrowDown, Network, Trophy } from "lucide-react"
+import { Cloud, Server, GitBranch, Shield, Container, Github, Linkedin, Download, FileText, Mail, Phone, Globe, MessageCircle, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Calendar, ArrowRight, FolderGit2, ArrowDown, Network, Trophy, Lightbulb } from "lucide-react"
 import { useEffect, useState } from "react"
  
 function App() {
@@ -15,6 +15,11 @@ function App() {
       icon: <Cloud className="w-8 h-8" />, 
       title: "Cloud Architecture",
       description: "Designing scalable and resilient cloud infrastructure on AWS and Azure. Expertise in microservices, serverless architectures, and cloud-native solutions."
+    },
+    { 
+      icon: <Lightbulb className="w-8 h-8" />, 
+      title: "Consultance",
+      description: "Providing expert guidance on cloud strategy, DevOps transformation, and technical architecture. Helping teams optimize workflows and make informed technology decisions."
     },
     { 
       icon: <Server className="w-8 h-8" />, 
@@ -74,7 +79,7 @@ function App() {
       if (!isCarouselPaused) {
         setCurrentCard((prev) => (prev + 1) % services.length)
       }
-    }, 3000)
+    }, 5000)
     return () => clearInterval(interval)
   }, [services.length, isCarouselPaused])
 

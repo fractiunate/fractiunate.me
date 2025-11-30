@@ -7,6 +7,7 @@ function App() {
   const [currentCard, setCurrentCard] = useState(0)
   const [currentSection, setCurrentSection] = useState(0)
   const [isCarouselPaused, setIsCarouselPaused] = useState(false)
+  const [isFooterVisible, setIsFooterVisible] = useState(false)
 
   const sections = ['hero', 'contact', 'cv']
 
@@ -20,7 +21,7 @@ function App() {
       icon: <Lightbulb className="w-8 h-8" />, 
       title: "Consultance",
       description: "Providing expert guidance on cloud strategy, DevOps transformation, and technical architecture. Helping teams optimize workflows and make informed technology decisions."
-    },
+    },  
     { 
       icon: <Server className="w-8 h-8" />, 
       title: "DevOps",
@@ -68,6 +69,13 @@ function App() {
       const viewportHeight = window.innerHeight
       const sectionIndex = Math.floor(scrollPosition / viewportHeight)
       setCurrentSection(Math.min(sectionIndex, sections.length - 1))
+      
+      // Check if footer is visible
+      const footer = document.querySelector('footer')
+      if (footer) {
+        const footerRect = footer.getBoundingClientRect()
+        setIsFooterVisible(footerRect.top < window.innerHeight)
+      }
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -137,18 +145,24 @@ function App() {
           </button>
         </div>
 
-        {/* Next Page Button - Same position on all sections */}
+        {/* Next Page Button / Jump to End Button - Same position on all sections */}
         <button
-          onClick={scrollToNextSection}
+          onClick={() => {
+            if (currentSection === sections.length - 1) {
+              document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' })
+            } else {
+              scrollToNextSection()
+            }
+          }}
           className={`group relative w-12 h-12 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center shadow-lg ${
-            currentSection < sections.length - 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+            isFooterVisible ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
           }`}
-          aria-label="Next page"
+          aria-label={currentSection === sections.length - 1 ? "Jump to end" : "Next page"}
         >
           <ArrowDown className="w-5 h-5 text-slate-300" />
           {/* Tooltip */}
           <span className="absolute right-full mr-3 px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-md text-sm text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            Next page
+            {currentSection === sections.length - 1 ? 'Jump to End' : 'Next page'}
           </span>
         </button>
       </div>
@@ -166,13 +180,19 @@ function App() {
           <ArrowUp className="w-5 h-5 text-white" />
         </button>
 
-        {/* Next Page Button */}
+        {/* Next Page Button / Jump to End Button */}
         <button
-          onClick={scrollToNextSection}
+          onClick={() => {
+            if (currentSection === sections.length - 1) {
+              document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' })
+            } else {
+              scrollToNextSection()
+            }
+          }}
           className={`w-12 h-12 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center shadow-lg ${
-            currentSection < sections.length - 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+            isFooterVisible ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
           }`}
-          aria-label="Next page"
+          aria-label={currentSection === sections.length - 1 ? "Jump to end" : "Next page"}
         >
           <ArrowDown className="w-5 h-5 text-slate-300" />
         </button>
@@ -442,10 +462,10 @@ function App() {
                 <div className="flex-1">
                   <h3 className="text-white font-semibold mb-2">Email</h3>
                   <a 
-                    href="mailto:d.rahaeuser@gmail.com"
+                    href="mailto: "
                     className="text-slate-300 hover:text-[oklch(60%_.25_330)] transition-colors"
                   >
-                    d.rahaeuser@gmail.com
+                    fractiunate@gmail.com
                   </a>
                 </div>
               </div>
@@ -568,6 +588,58 @@ function App() {
           </p>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-slate-900/50 border-t border-slate-700/50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            {/* Contact Information */}
+            <div>
+              <h3 className="text-white font-semibold text-lg mb-4">Kontakt</h3>
+              <div className="space-y-2 text-slate-300">
+                <div>
+                  <p className="text-sm text-slate-400">Telefon:</p>
+                  <a 
+                    href="tel:+4915209261143"
+                    className="hover:text-[oklch(60%_.25_330)] transition-colors"
+                  >
+                    +49 152 0926 1143
+                  </a>
+                </div>
+                <div>
+                  <p className="text-sm text-slate-400 mt-3">E-Mail:</p>
+                  <a 
+                    href="mailto:fractiunate@gmail.com"
+                    className="hover:text-[oklch(60%_.25_330)] transition-colors"
+                  >
+                    fractiunate@gmail.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Legal Notice */}
+            <div>
+              <h3 className="text-white font-semibold text-lg mb-4">Legal Notice</h3>
+              <div className="space-y-2 text-slate-300 text-sm">
+                <p>David Rahäuser</p>
+                <p>Karl-Marx-Straße 179D</p>
+                <p>12043 Berlin</p>
+                <p className="mt-3">Fractiunate, vertreten durch: David Rahäuser</p>
+                <p className="mt-3">Umsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz:</p>
+                <p>DE337960737</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="border-t border-slate-700/50 pt-8 text-center">
+            <p className="text-slate-400 text-sm">
+              © {new Date().getFullYear()} fractiunate.me - All rights reserved
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
@@ -584,4 +656,5 @@ function ServiceCard({ icon, title }: { icon: React.ReactNode; title: string }) 
   )
 }
  
+
 export default App

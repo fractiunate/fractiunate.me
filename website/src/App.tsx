@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
-import { Cloud, Server, GitBranch, Shield, Container, Github, Linkedin, Download, FileText, Mail, Phone, Globe, MessageCircle, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Calendar, ArrowRight, FolderGit2, ArrowDown, Network, Trophy, Lightbulb } from "lucide-react"
+import { Cloud, Server, GitBranch, Shield, Container, Github, Linkedin, Download, FileText, Mail, Phone, Globe, MessageCircle, ChevronLeft, ChevronRight, ArrowUp, BookOpen, ArrowDown, Network, Trophy, Lightbulb } from "lucide-react"
 import { useEffect, useState } from "react"
- 
+
 function App() {
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [currentCard, setCurrentCard] = useState(0)
@@ -12,48 +12,48 @@ function App() {
   const sections = ['hero', 'contact', 'cv']
 
   const services = [
-    { 
-      icon: <Cloud className="w-8 h-8" />, 
+    {
+      icon: <Cloud className="w-8 h-8" />,
       title: "Cloud Architecture",
       description: "Designing scalable and resilient cloud infrastructure on AWS and Azure. Expertise in microservices, serverless architectures, and cloud-native solutions."
     },
-    { 
-      icon: <Lightbulb className="w-8 h-8" />, 
+    {
+      icon: <Lightbulb className="w-8 h-8" />,
       title: "Consultance",
       description: "Providing expert guidance on cloud strategy, DevOps transformation, and technical architecture. Helping teams optimize workflows and make informed technology decisions."
-    },  
-    { 
-      icon: <Server className="w-8 h-8" />, 
+    },
+    {
+      icon: <Server className="w-8 h-8" />,
       title: "DevOps",
       description: "Implementing CI/CD pipelines, infrastructure as code, and automation strategies. Streamlining development workflows for faster, reliable deployments."
     },
-    { 
-      icon: <Container className="w-8 h-8" />, 
+    {
+      icon: <Container className="w-8 h-8" />,
       title: "Containers",
       description: "Building and managing containerized applications with Docker. Optimizing container images and orchestrating multi-container environments."
     },
-    { 
-      icon: <GitBranch className="w-8 h-8" />, 
+    {
+      icon: <GitBranch className="w-8 h-8" />,
       title: "CI/CD",
       description: "Automating build, test, and deployment processes. Creating robust pipelines with GitHub Actions, GitLab CI and ArgoCD."
     },
-    { 
-      icon: <Shield className="w-8 h-8" />, 
+    {
+      icon: <Shield className="w-8 h-8" />,
       title: "Security",
       description: "Implementing security best practices, compliance standards, and automated security scanning. Ensuring secure infrastructure and application deployments."
     },
-    { 
-      icon: <Network className="w-8 h-8" />, 
+    {
+      icon: <Network className="w-8 h-8" />,
       title: "Kubernetes",
       description: "Deploying and managing production-grade Kubernetes clusters. Expertise in Helm, operators, service mesh, and cloud-native ecosystem tools."
     },
-    { 
-      icon: <Server className="w-8 h-8" />, 
+    {
+      icon: <Server className="w-8 h-8" />,
       title: "Backend",
       description: "Building robust server-side applications and APIs. Expertise in Node.js, Python, and microservices architecture for scalable backend solutions."
     },
-    { 
-      icon: <Trophy className="w-8 h-8" />, 
+    {
+      icon: <Trophy className="w-8 h-8" />,
       title: "Frontend",
       description: "Creating responsive and modern web applications. Proficient in React, TypeScript, and modern frontend frameworks for exceptional user experiences."
     },
@@ -64,12 +64,12 @@ function App() {
       const scrollPosition = window.scrollY
       // Show back to top button after scrolling past the first viewport
       setShowBackToTop(scrollPosition > window.innerHeight)
-      
+
       // Determine current section
       const viewportHeight = window.innerHeight
       const sectionIndex = Math.floor(scrollPosition / viewportHeight)
       setCurrentSection(Math.min(sectionIndex, sections.length - 1))
-      
+
       // Check if footer is visible
       const footer = document.querySelector('footer')
       if (footer) {
@@ -114,13 +114,11 @@ function App() {
       {/* Navigation Buttons - Bottom Right (Desktop) */}
       <div className="hidden lg:flex fixed right-8 bottom-6 flex-col items-center gap-3 z-50">
         {/* Scroll Down Indicator / Back to Top Button - Seamless Transition */}
-        <div className={`relative flex items-center justify-center transition-all duration-500 ${
-          currentSection === 0 ? 'h-[140px]' : 'h-12'
-        }`}>
-          {/* Scroll Down Indicator - Hero Section Only (not clickable) */}
-          <div className={`absolute flex flex-col items-center gap-2 pointer-events-none transition-all duration-500 ${
-            currentSection === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        <div className={`relative flex items-center justify-center transition-all duration-500 ${currentSection === 0 ? 'h-[140px]' : 'h-12'
           }`}>
+          {/* Scroll Down Indicator - Hero Section Only (not clickable) */}
+          <div className={`absolute flex flex-col items-center gap-2 pointer-events-none transition-all duration-500 ${currentSection === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}>
             <span className="text-slate-400 text-xs whitespace-nowrap">scroll</span>
             <span className="text-slate-400 text-xs whitespace-nowrap">down</span>
             <div className="h-8 w-px border-l-2 border-dotted border-slate-400"></div>
@@ -132,9 +130,8 @@ function App() {
           {/* Back to Top Button */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className={`group relative w-12 h-12 rounded-full bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] hover:from-[oklch(55%_.22_325)] hover:to-[oklch(60%_.25_320)] shadow-lg shadow-[oklch(60%_.25_330)]/30 flex items-center justify-center transition-all duration-500 ${
-              showBackToTop ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-            }`}
+            className={`group relative w-12 h-12 rounded-full bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] hover:from-[oklch(55%_.22_325)] hover:to-[oklch(60%_.25_320)] shadow-lg shadow-[oklch(60%_.25_330)]/30 flex items-center justify-center transition-all duration-500 ${showBackToTop ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+              }`}
             aria-label="Back to top"
           >
             <ArrowUp className="w-5 h-5 text-white" />
@@ -154,9 +151,8 @@ function App() {
               scrollToNextSection()
             }
           }}
-          className={`group relative w-12 h-12 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center shadow-lg ${
-            isFooterVisible ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
-          }`}
+          className={`group relative w-12 h-12 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center shadow-lg ${isFooterVisible ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
+            }`}
           aria-label={currentSection === sections.length - 1 ? "Jump to end" : "Next page"}
         >
           <ArrowDown className="w-5 h-5 text-slate-300" />
@@ -172,9 +168,8 @@ function App() {
         {/* Back to Top Button */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className={`w-12 h-12 rounded-full bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] hover:from-[oklch(55%_.22_325)] hover:to-[oklch(60%_.25_320)] shadow-lg shadow-[oklch(60%_.25_330)]/30 flex items-center justify-center transition-all duration-300 ${
-            showBackToTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-          }`}
+          className={`w-12 h-12 rounded-full bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] hover:from-[oklch(55%_.22_325)] hover:to-[oklch(60%_.25_320)] shadow-lg shadow-[oklch(60%_.25_330)]/30 flex items-center justify-center transition-all duration-300 ${showBackToTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+            }`}
           aria-label="Back to top"
         >
           <ArrowUp className="w-5 h-5 text-white" />
@@ -189,9 +184,8 @@ function App() {
               scrollToNextSection()
             }
           }}
-          className={`w-12 h-12 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center shadow-lg ${
-            isFooterVisible ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
-          }`}
+          className={`w-12 h-12 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-slate-700 hover:border-[oklch(60%_.25_330)] transition-all duration-300 flex items-center justify-center shadow-lg ${isFooterVisible ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
+            }`}
           aria-label={currentSection === sections.length - 1 ? "Jump to end" : "Next page"}
         >
           <ArrowDown className="w-5 h-5 text-slate-300" />
@@ -232,7 +226,7 @@ function App() {
       <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pb-32">
         <div id="hero" className="max-w-4xl mx-auto text-center">
           {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight mt-16 sm:mt-20 lg:mt-24">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight mt-10 sm:mt-16">
             This is{" "}
             <span className="relative inline-block">
               <span className="bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] bg-clip-text text-transparent" style={{
@@ -251,26 +245,26 @@ function App() {
               </span>
             </span>
           </h1>
-          
+
           {/* Subheading */}
           <p className="text-lg sm:text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto">
             Hi, I'm David. Glad you found your way to Quality Software Engineering & Cloud Architecture, made in Berlin.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <a href="#contact" className="w-full sm:w-auto">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="w-full sm:w-48 bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] hover:from-[oklch(55%_.22_325)] hover:to-[oklch(60%_.25_320)] text-white border-0 shadow-lg shadow-[oklch(60%_.25_330)]/30"
               >
                 Get in Touch
               </Button>
             </a>
             <a href="#cv" className="w-full sm:w-auto">
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 className="w-full sm:w-48 bg-transparent border-2 border-slate-600 text-white hover:bg-slate-800/50 hover:border-[oklch(60%_.25_330)] hover:text-white transition-all duration-300"
               >
                 <Trophy className="w-5 h-5 mr-2" />
@@ -278,13 +272,23 @@ function App() {
               </Button>
             </a>
             <a href="https://devops-sushi.de/" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 className="w-full sm:w-48 bg-transparent border-2 border-slate-600 text-white hover:bg-slate-800/50 hover:border-[oklch(60%_.25_330)] hover:text-white transition-all duration-300"
               >
                 <BookOpen className="w-5 h-5 mr-2" />
                 Read Blog
+              </Button>
+            </a>
+            <a href="https://tree.fractiunate.me" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-48 bg-transparent border-2 border-slate-600 text-white hover:bg-slate-800/50 hover:border-[oklch(60%_.25_330)] hover:text-white transition-all duration-300"
+              >
+                <Network className="w-5 h-5 mr-2" />
+                Link Tree
               </Button>
             </a>
           </div>
@@ -394,11 +398,10 @@ function App() {
               <button
                 key={index}
                 onClick={() => setCurrentCard(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentCard 
-                    ? 'bg-[oklch(60%_.25_330)] w-8' 
-                    : 'bg-slate-600 hover:bg-slate-500'
-                }`}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentCard
+                  ? 'bg-[oklch(60%_.25_330)] w-8'
+                  : 'bg-slate-600 hover:bg-slate-500'
+                  }`}
                 aria-label={`Go to ${services[index].title}`}
               />
             ))}
@@ -427,8 +430,8 @@ function App() {
           </div>
         </div>
 
-          {/* Current Work Status */}
-          {/* <div className="flex justify-center mt-16">
+        {/* Current Work Status */}
+        {/* <div className="flex justify-center mt-16">
             <div className="inline-flex items-center gap-2 bg-slate-800/50 border border-slate-700 rounded-full px-6 py-3">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
               <p className="text-sm sm:text-base text-slate-300">
@@ -461,7 +464,7 @@ function App() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-white font-semibold mb-2">Email</h3>
-                  <a 
+                  <a
                     href="mailto: "
                     className="text-slate-300 hover:text-[oklch(60%_.25_330)] transition-colors"
                   >
@@ -479,7 +482,7 @@ function App() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-white font-semibold mb-2">Mobile</h3>
-                  <a 
+                  <a
                     href="tel:+4915209261143"
                     className="text-slate-300 hover:text-[oklch(60%_.25_330)] transition-colors"
                   >
@@ -497,7 +500,7 @@ function App() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-white font-semibold mb-2">Website</h3>
-                  <a 
+                  <a
                     href="https://fractiunate.me"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -517,7 +520,7 @@ function App() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-white font-semibold mb-2">WhatsApp</h3>
-                  <a 
+                  <a
                     href="https://wa.me/4915209261143"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -552,8 +555,8 @@ function App() {
           {/* Download Button */}
           <div className="flex justify-center mb-8">
             <a href="/cv.pdf" download="Fractiunate_CV.pdf">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="bg-gradient-to-r from-[oklch(60%_.25_330)] to-[oklch(65%_.25_320)] hover:from-[oklch(55%_.22_325)] hover:to-[oklch(60%_.25_320)] text-white border-0 shadow-lg shadow-[oklch(60%_.25_330)]/30"
               >
                 <Download className="w-5 h-5 mr-2" />
@@ -576,9 +579,9 @@ function App() {
           {/* Fallback message for mobile or if PDF doesn't load */}
           <p className="text-center text-slate-400 text-sm mt-6">
             If the PDF doesn't display, you can{" "}
-            <a 
-              href="/cv.pdf" 
-              target="_blank" 
+            <a
+              href="/cv.pdf"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-[oklch(60%_.25_330)] hover:underline"
             >
@@ -599,7 +602,7 @@ function App() {
               <div className="space-y-2 text-slate-300">
                 <div>
                   <p className="text-sm text-slate-400">Telefon:</p>
-                  <a 
+                  <a
                     href="tel:+4915209261143"
                     className="hover:text-[oklch(60%_.25_330)] transition-colors"
                   >
@@ -608,7 +611,7 @@ function App() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-400 mt-3">E-Mail:</p>
-                  <a 
+                  <a
                     href="mailto:fractiunate@gmail.com"
                     className="hover:text-[oklch(60%_.25_330)] transition-colors"
                   >
@@ -643,18 +646,5 @@ function App() {
     </div>
   )
 }
-
-// Service Card Component
-function ServiceCard({ icon, title }: { icon: React.ReactNode; title: string }) {
-  return (
-    <div className="group bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-lg p-4 sm:p-6 hover:bg-slate-800/50 hover:border-[oklch(60%_.25_330)]/50 transition-all duration-300 hover:scale-105">
-      <div className="text-[oklch(60%_.25_330)] mb-2 group-hover:scale-110 transition-transform duration-300 flex justify-center">
-        {icon}
-      </div>
-      <h3 className="text-white text-sm sm:text-base font-medium">{title}</h3>
-    </div>
-  )
-}
- 
 
 export default App
